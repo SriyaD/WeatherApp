@@ -1,5 +1,5 @@
 const express = require("express");
-const https = require("https");
+const https = require("https"); //no need to innstall http module. It is a native node module.
 const app = express();
 
 //body pareser allows us to go through the data that the usrer submitted
