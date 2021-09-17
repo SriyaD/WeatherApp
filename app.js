@@ -17,17 +17,21 @@ app.post("/",function(req,res){
     const query=req.body.cityname;
     const apiKey="your api key"; //removed due to security reasons
     const unit="metric";
+
     const url="https://api.openweathermap.org/data/2.5/weather?q="+query +"&appid="+ apiKey +"&units="+unit;
     //make a http get rquest to get data from world wide web(here weather api) weather api
     https.get(url,function(response){
     // console.log(response.statusCode);//like 201 404 etc
 
-    response.on("data",function(data) {//used to send a response when user requests on our server
+    response.on("data",function(data) {
+        //used to send a response when user requests on our server. on is a method and we search through the data that the api sent us, parse it into json and fetch useful info
+    
     const weatherdata=JSON.parse(data); // the data that the server(of api) sends to us .that data we are parsing and converting into js object
     const temperature=weatherdata.main.temp;  // from the data obtained we tap into the attributes like temperature,description etc..
     // console.log(temperature);                // and then console log our requires featues
     const description=weatherdata.weather[0].description;
     // console.log(description);
+    
     const icon=weatherdata.weather[0].icon;
     const imageurl="http://openweathermap.org/img/wn/"+ icon+"@2x.png";
     const city=
